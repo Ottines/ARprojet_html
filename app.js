@@ -4,6 +4,9 @@ import { Stats } from './stats.module.js';
 import { ARButton } from './ARButton.js';
 
 class App{
+
+    done = new Boolean(false);
+
 	constructor(){
 		const container = document.createElement( 'div' );
 		document.body.appendChild( container );
@@ -51,19 +54,20 @@ class App{
         let controller;
         
         function onSelect() {
-            const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+            const material = new THREE.MeshPhongMaterial( { color: 0xffffff } );
             const mesh = new THREE.Mesh( self.geometry, material );
             mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
             mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
             self.scene.add( mesh );
             self.meshes.push( mesh );
-
+            this.done = false;
         }
 
         const btn = new ARButton( this.renderer );
         
         controller = this.renderer.xr.getController( 0 );
-        controller.addEventListener( 'select', onSelect );
+        if(done == true)
+            controller.addEventListener( 'select', onSelect );
         this.scene.add( controller );
         
         this.renderer.setAnimationLoop( this.render.bind(this) );
@@ -77,7 +81,7 @@ class App{
     
 	render( ) {   
         this.stats.update();
-        this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
+        //this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
 }
