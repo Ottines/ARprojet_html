@@ -5,8 +5,6 @@ import { ARButton } from './ARButton.js';
 
 class App{
 
-    polyfill = new WebXRPolyfill();
-
 	constructor(){
 		const container = document.createElement( 'div' );
 		document.body.appendChild( container );
