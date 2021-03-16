@@ -5,7 +5,7 @@ import { ARButton } from './ARButton.js';
 
 class App{
 
-    done = new Boolean(false);
+    polyfill = new WebXRPolyfill();
 
 	constructor(){
 		const container = document.createElement( 'div' );
@@ -60,14 +60,12 @@ class App{
             mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
             self.scene.add( mesh );
             self.meshes.push( mesh );
-            this.done = false;
         }
 
         const btn = new ARButton( this.renderer );
         
         controller = this.renderer.xr.getController( 0 );
-        if(done == true)
-            controller.addEventListener( 'select', onSelect );
+        controller.addEventListener( 'select', onSelect );
         this.scene.add( controller );
         
         this.renderer.setAnimationLoop( this.render.bind(this) );
