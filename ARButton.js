@@ -21,7 +21,7 @@ class ARButton{
 			button.style.display = 'none';
             button.style.height = '40px';
 
-			navigator.xr.isSessionSupported( 'immersive-ar' ).then( ( supported ) => {
+			navigator.xr.isSessionSupported( 'immersive-vr' ).then( ( supported ) => {
 
 				supported ? this.showStartAR( button ) : this.showARNotSupported( button );
 
