@@ -21,7 +21,7 @@ class ARButton{
 			button.style.display = 'none';
             button.style.height = '40px';
 
-			navigator.xr.isSessionSupported( 'immersive-vr' ).then( ( supported ) => {
+			navigator.xr.isSessionSupported( 'immersive-ar' ).then( ( supported ) => {
 
 				supported ? this.showStartAR( button ) : this.showARNotSupported( button );
 
@@ -95,8 +95,6 @@ class ARButton{
 
         }
 
-        //
-
         button.style.display = '';
         button.style.right = '20px';
         button.style.width = '80px';
@@ -130,15 +128,10 @@ class ARButton{
                 // requestReferenceSpace call will fail if it turns out to be unavailable.
                 // ('local' is always available for immersive sessions and doesn't need to
                 // be requested separately.)
-                
                 navigator.xr.requestSession( 'immersive-ar', self.sessionInit ).then( onSessionStarted );
-
             } else {
-
                 currentSession.end();
-
             }
-
         };
 
     }
@@ -157,7 +150,6 @@ class ARButton{
 
     showARNotSupported( button ) {
         this.stylizeElement( button, false );
-        
         this.disableButton(button);
 
         button.style.display = '';
