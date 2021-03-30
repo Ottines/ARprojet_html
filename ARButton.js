@@ -4,6 +4,8 @@
  * @author NikLever / http://niklever.com
  */
 
+import XRSystem from './xrsystem.js';
+
 class ARButton{
 
 	constructor( renderer, options ) {
