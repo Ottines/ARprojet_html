@@ -4,7 +4,7 @@
  * @author NikLever / http://niklever.com
  */
 
-import XRSystem from './xrsystem.js';
+//import XRSystem from './xrsystem.js';
 
 class ARButton{
 
