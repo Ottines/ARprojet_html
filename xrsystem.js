@@ -11,6 +11,6 @@ let XRSystem = function() {
 
 };
 
-let xrSysteme = new XRSystem();
+let xrSystem = new XRSystem();
 
-navigator.xr.isSessionSupported = xrSysteme.isSessionSupported;
+navigator.xr.isSessionSupported = xrSystem.isSessionSupported;
