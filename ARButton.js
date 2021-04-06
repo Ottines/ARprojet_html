@@ -27,7 +27,7 @@ class ARButton{
 
 				supported ? this.showStartAR( button ) : this.showARNotSupported( button );
 
-			} );
+			});
             
             document.body.appendChild( button );
 

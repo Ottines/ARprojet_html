@@ -1,3 +1,5 @@
+import ARdevice from './ardevice.js'
+
 
 let XRSystem = function() {
 
@@ -5,12 +7,23 @@ let XRSystem = function() {
     if (sessionMode === "immersive-ar" || sessionMode === "inline")
       return true;
     else 
-      throw false;
+      return false;
   };
 
+  this.requestSession = async function(sessionMode, sessionInit) {
+    if (sessionMode !== "immersive-ar" && sessionMode !== "inline")
+        throw false;
+
+    device = new ARDevice();
+    
+    await device.start();
+    
+    return new XRSession(device, sessionInit);
+};
 
 };
 
-let xrSysteme = new XRSystem();
+let xrSystem = new XRSystem();
 
-navigator.xr.isSessionSupported = xrSysteme.isSessionSupported;
+navigator.xr.isSessionSupported = xrSystem.isSessionSupported;
+navigator.xr.requestSession = xrSystem.requestSession;
