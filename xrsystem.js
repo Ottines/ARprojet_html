@@ -26,4 +26,7 @@ let XRSystem = function() {
 let xrSystem = new XRSystem();
 
 navigator.xr.isSessionSupported = xrSystem.isSessionSupported;
+<<<<<<< HEAD
 navigator.xr.requestSession = xrSystem.requestSession;
+=======
+>>>>>>> 26c62c041cb9685f6b24b55544426e479e8f2ba4
