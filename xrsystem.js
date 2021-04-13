@@ -3,10 +3,12 @@ import * as ARDevice from './ardevice.js'
 
 let XRSystem = function() {
 
+  let device;
+
   this.isSessionSupported = async function(sessionMode) {
     if (sessionMode === "immersive-ar" || sessionMode === "inline")
       return true;
-    else 
+    else
       return false;
   };
 

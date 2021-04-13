@@ -20,7 +20,8 @@ let ARDevice = function(deviceConfig) {
     Object.defineProperty(this,"enabledFeatures", {
         value : [ ],
         writable: false
-    }); 
+    });
+    
     /** 
     // choses nécessaires pour la configuration :
     var mat2quat = function(m) {
