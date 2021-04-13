@@ -2,15 +2,15 @@ import AR from './aruco.js';
 
 let ARDevice = function(deviceConfig) {
 
-    //let canvas = null; 
-    //let video = null;
-    //let detector = new AR.Detector();
+    let canvas = null; 
+    let video = null;
+    let detector = new AR.Detector();
     
     Object.defineProperty(this, "started", {
         get: function() { return started; }
     });
     
-    //on force l'appareil a supporter l'ar
+    //on force l'appareil a supporter l'AR
     Object.defineProperty(this,"supportedModes", {
         value : [ 'immersive-ar', 'inline' ],
         writable: false
