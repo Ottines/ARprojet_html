@@ -3,9 +3,9 @@ import AR from './aruco.js';
 
 let ARDevice = function(deviceConfig) {
 
-    let canvas = null; 
-    let video = null;
-    let detector = new AR.Detector();
+    //let canvas = null; 
+    //let video = null;
+    //let detector = new AR.Detector();
     
     Object.defineProperty(this, "started", {
         get: function() { return started; }
