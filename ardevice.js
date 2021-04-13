@@ -79,7 +79,7 @@ let ARDevice = function(deviceConfig) {
             video.play();
         };
 
-        let shadow = document.body.attachShadow({mode: 'close'});        
+        let shadow = document.body.attachShadow({mode: 'closed'});        
         shadow.appendChild(video);
         shadow.appendChild(canvas);        
     };
