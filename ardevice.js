@@ -1,6 +1,5 @@
 import AR from './aruco.js';
 
-
 let ARDevice = function(deviceConfig) {
 
     //let canvas = null; 
@@ -111,3 +110,4 @@ let ARDevice = function(deviceConfig) {
           
 };
 
+export { ARDevice as default };
