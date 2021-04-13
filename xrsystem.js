@@ -2,7 +2,6 @@ import * as ARDevice from './ardevice.js'
 
 
 let XRSystem = function() {
-
   let device;
 
   this.isSessionSupported = async function(sessionMode) {
