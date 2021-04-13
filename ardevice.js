@@ -21,7 +21,7 @@ let ARDevice = function(deviceConfig) {
         writable: false
     });
     
-    /** 
+    
     // choses nécessaires pour la configuration :
     var mat2quat = function(m) {
         let qw, qx, qy, qz;
@@ -73,7 +73,6 @@ let ARDevice = function(deviceConfig) {
         canvas.style.width = canvas.width + "px";
         canvas.style.height = canvas.height + "px";
         
-        
         let mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
         video.srcObject = mediaStream;
         video.onloadedmetadata = function(e) {
@@ -106,7 +105,7 @@ let ARDevice = function(deviceConfig) {
     
     this.getImager = function() {
         return canvas;
-    };*/
+    };
           
 };
 
