@@ -1,4 +1,4 @@
-import ARDevice from './ardevice.js'
+import * as ARDevice from './ardevice.js'
 
 
 let XRSystem = function() {
