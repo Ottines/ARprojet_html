@@ -2,6 +2,7 @@ import AR from './aruco.js';
 
 
 let ARDevice = function(deviceConfig) {
+
     let canvas = null; 
     let video = null;
     let detector = new AR.Detector();
@@ -20,7 +21,7 @@ let ARDevice = function(deviceConfig) {
         value : [ ],
         writable: false
     }); 
-     
+    /** 
     // choses nécessaires pour la configuration :
     var mat2quat = function(m) {
         let qw, qx, qy, qz;
@@ -105,6 +106,7 @@ let ARDevice = function(deviceConfig) {
     
     this.getImager = function() {
         return canvas;
-    };
+    };*/
           
 };
+
