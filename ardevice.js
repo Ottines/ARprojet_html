@@ -65,8 +65,8 @@ let ARDevice = function(deviceConfig) {
      
     this.start = async function() {
         // creation of video node in order to obtain video stream
-        //Modif de la fenetre avec window.innerWidth / window.innerHeight
-        let constraints = { video: { width: 640, height: 520 } };
+        //Besoin de comprendre la cam
+        let constraints = { video: { width: 640, height: 520 } };//Modif de la fenetre avec window.innerWidth / window.innerHeight
         video = document.createElement("video");
         canvas = document.createElement("canvas");
         canvas.width = video.width = constraints.video.width;
