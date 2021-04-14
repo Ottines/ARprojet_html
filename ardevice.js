@@ -65,7 +65,7 @@ let ARDevice = function(deviceConfig) {
      
     this.start = async function() {
         // creation of video node in order to obtain video stream
-        let constraints = { video: { width: 640, height: 480 } };
+        let constraints = { video: { width: window.innerWidth, height: window.innerHeight } };
         video = document.createElement("video");
         canvas = document.createElement("canvas");
         canvas.width = video.width = constraints.video.width;
