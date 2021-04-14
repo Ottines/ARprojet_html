@@ -15,6 +15,7 @@ let XRSystem = function() {
     if (sessionMode !== "immersive-ar" && sessionMode !== "inline")
         throw false;
 
+        //BESOIN DE POSER DES QUESTIONS ICI
     device = new ARDevice();
     
     await device.start();

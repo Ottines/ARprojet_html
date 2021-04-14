@@ -65,7 +65,8 @@ let ARDevice = function(deviceConfig) {
      
     this.start = async function() {
         // creation of video node in order to obtain video stream
-        let constraints = { video: { width: window.innerWidth, height: window.innerHeight } };
+        //Modif de la fenetre avec window.innerWidth / window.innerHeight
+        let constraints = { video: { width: 640, height: 520 } };
         video = document.createElement("video");
         canvas = document.createElement("canvas");
         canvas.width = video.width = constraints.video.width;
@@ -79,20 +80,20 @@ let ARDevice = function(deviceConfig) {
             video.play();
         };
 
-        let shadow = document.body.attachShadow({mode: 'closed'});        
+        let shadow = document.body.attachShadow({mode: 'closed'});    
         shadow.appendChild(video);
-        shadow.appendChild(canvas);        
+        shadow.appendChild(canvas);  
     };
     
     
     this.getFrame = function() {
-        if (canvas === null) 
+        if (canvas === null)
             return;
         let context = canvas.getContext('2d');
         context.drawImage(video,0,0);
         let markers = detector.detect(context.getImageData(0,0,canvas.width, canvas.height));
         if (markers.length <= 0)
-            return ; 
+            return ;
         
         let pose = square_pose.pose(markers[0].corners);
         
@@ -106,7 +107,7 @@ let ARDevice = function(deviceConfig) {
     this.getImager = function() {
         return canvas;
     };
-          
+
 };
 
 export { ARDevice as default };
