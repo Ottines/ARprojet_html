@@ -4,34 +4,41 @@ import XRRenderState from './xrrenderstate.js'
  * D'après la spécification webXR
  * https://www.w3.org/TR/webxr/#xrsession-interface
  */
-class XRSession extends EventTarget {
+ let XRSession = function(device, params) {
 
-    //Attribut ??
-    //readonly attribute XRVisibilityState visibilityState; ca c'est pas OK
-    //[SameObject] readonly attribute XRRenderState renderState; ca c'est OK 
-    //[SameObject] readonly attribute XRInputSourceArray inputSources; ca c'est pas OK
+    let frameCount = 0;
+    let callbacks = [];
+    let inputSources= []; //[SameObject] readonly attribute XRInputSourceArray inputSources;
+    let visibilityState; //readonly attribute XRVisibilityState visibilityState;
+    let ended = false;
+    let sessionMode = params;
+    let device = device;
+    let redenState = { depthNear = 0.1, //[SameObject] readonly attribute XRRenderState renderState;
+        depthFar = 1000,
+        inlineVerticalFieldOfView = null,
+        baseLayer = null }
 
-    constructor(device, sessionMode) {
-        this.sessionMode = sessionMode;
-        this.device = device;
-        if(sessionMode ==="inline")
-        {
-            inline = Math.PI*0.5;
-        } else inline = null;
-        this.renderState= { depthNear = 0.1,
-                            depthFar = 1000,
-                            inlineVerticalFieldOfView = inline,
-                            baseLayer = null };
-    }
- 
-    updateRenderState(xrRenderState){
+
+    Object.defineProperty(this,"inputSources", {
+        get: function() { return inputSources; }
+    });
+        
+    Object.defineProperty(this,"renderState", {
+        get: function() { return renderState; }
+    });
+    
+    Object.defineProperty(this,"visibilityState", {
+        get: function() { return visibilityState; }
+    });
+
+    let updateRenderState = function(xrRenderState) {
         this.renderState.depthNear = xrRenderState.depthNear;
         this.renderState.depthFar = xrRenderState.depthFar;
         this.renderState.inlineVerticalFieldOfView = xrRenderState.inlineVerticalFieldOfView; 
         this.renderState.baseLayer = xrRenderState.baseLayer;
     }
 
-    requestReferenceSpace = async function(XRReferenceSpaceType) {
+    let requestReferenceSpace = async function(XRReferenceSpaceType) {
         if(XRReferenceSpaceType === "bounded-floor") {
             var referenceSpace = new XRBoundedReferenceSpace();
             return referenceSpace;
@@ -43,19 +50,49 @@ class XRSession extends EventTarget {
         else return false;
     }
 
-    requestAnimationFrame(callback) {
-
+    let requestAnimationFrame = function(callback) {
+        frameCount++;
+        callbacks.push(animationFrameCallback);
+        console.log("session requestAnimationFrame", callbacks.length);
+        return frameCount;
     }
 
-    cancelAnimationFrame(handle) {
-
+    let cancelAnimationFrame = function(handle) {
+        window.cancelAnimationFrame(handle);
     }
 
-    end = async function() {
-        
+    let end = async function() {
     } 
 
+    let renderFrame = function() {
+        let callback = callbacks.shift();
+        if (callback !== undefined) {
+            console.log('sessionCallback');                
+            callback(Date.now() - refTime, new XRFrame(this, device)); //Pas encore fait le XRFrame
+            if (compositor.isActive()) {
+                //compositor.updateVideo();
+                compositor.render();
+            }
+        }
+    }
 
+    device.setRenderCallback(renderFrame);
+
+
+
+
+    
+
+    //les events
+    let onend;
+    let oninputsourceschange;
+    let onselect;
+    let onselectstart;
+    let onselectend;
+    let onsqueeze;
+    let onsqueezestart;
+    let onsqueezeend;
+    let onvisibilitychange;
     
 }
 
