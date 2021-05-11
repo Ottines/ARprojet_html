@@ -10,7 +10,7 @@ let XRFrame = function(xrSession,xrDevice) {
     });
 
     this.getViewerPose = function(referenceSpace) {
-
+        
     }
 
     this.getPose = function(space, baseSpace) {

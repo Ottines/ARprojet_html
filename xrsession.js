@@ -10,7 +10,7 @@ import XRRenderState from './xrrenderstate.js'
     let inputSources= []; //[SameObject] readonly attribute XRInputSourceArray inputSources;
     let visibilityState; //readonly attribute XRVisibilityState visibilityState;
     let compositor = new ARCompositor(device); //Nécessaire pour le fonctionnement du
-    let redenState = { //[SameObject] readonly attribute XRRenderState renderState;
+    let renderState = { //[SameObject] readonly attribute XRRenderState renderState;
         depthNear = 0.1, 
         depthFar = 1000,
         inlineVerticalFieldOfView = null,
