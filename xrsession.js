@@ -1,6 +1,5 @@
 import XRRenderState from './xrrenderstate.js'
 /**
- * Auteur : Otti et Mr Didier
  * D'après la spécification webXR
  * https://www.w3.org/TR/webxr/#xrsession-interface
  */
