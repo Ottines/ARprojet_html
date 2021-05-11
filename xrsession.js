@@ -1,6 +1,6 @@
 import XRRenderState from './xrrenderstate.js'
 /**
- * Auteur : Otti
+ * Auteur : Otti et Mr Didier
  * D'après la spécification webXR
  * https://www.w3.org/TR/webxr/#xrsession-interface
  */
@@ -12,11 +12,11 @@ import XRRenderState from './xrrenderstate.js'
     let visibilityState; //readonly attribute XRVisibilityState visibilityState;
     let ended = false;
     let sessionMode = params;
-    let device = device;
+    let compositor = new ARCompositor(device);
     let redenState = { depthNear = 0.1, //[SameObject] readonly attribute XRRenderState renderState;
         depthFar = 1000,
         inlineVerticalFieldOfView = null,
-        baseLayer = null }
+        baseLayer = null };
 
 
     Object.defineProperty(this,"inputSources", {
@@ -50,6 +50,7 @@ import XRRenderState from './xrrenderstate.js'
         else return false;
     }
 
+    
     let requestAnimationFrame = function(callback) {
         frameCount++;
         callbacks.push(animationFrameCallback);
@@ -77,12 +78,7 @@ import XRRenderState from './xrrenderstate.js'
     }
 
     device.setRenderCallback(renderFrame);
-
-
-
-
     
-
     //les events
     let onend;
     let oninputsourceschange;
@@ -93,6 +89,45 @@ import XRRenderState from './xrrenderstate.js'
     let onsqueezestart;
     let onsqueezeend;
     let onvisibilitychange;
+
+    // another way of doing it 
+    let listeners = {};
+    this.addEventListener = function (type, callback) {
+        if (!(type in listeners)) {
+            listeners[type] = []
+        }
+        listeners[type].push(callback)
+    };
+    
+    this.removeEventListener = function (type, callback) {
+        if (!(type in listeners)) {
+            return
+        }
+        const stack = listeners[type]
+        for (let i = 0, l = stack.length; i < l; i++) {
+            if (stack[i] === callback) {
+                stack.splice(i, 1)
+            return
+        }
+    };
+    
+    this.dispatchEvent = function (event) {
+        if (!(event.type in listeners)) {
+            return true
+        }
+        const stack = listeners[event.type].slice()
+
+        for (let i = 0, l = stack.length; i < l; i++) {
+            stack[i].call(this, event)
+        }
+        return !event.defaultPrevented
+    };
     
 }
+
+};
+
+export { XRSession as default}; 
+
+
 
