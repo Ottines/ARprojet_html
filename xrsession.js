@@ -10,10 +10,9 @@ import XRRenderState from './xrrenderstate.js'
     let callbacks = [];
     let inputSources= []; //[SameObject] readonly attribute XRInputSourceArray inputSources;
     let visibilityState; //readonly attribute XRVisibilityState visibilityState;
-    let ended = false;
-    let sessionMode = params;
-    let compositor = new ARCompositor(device);
-    let redenState = { depthNear = 0.1, //[SameObject] readonly attribute XRRenderState renderState;
+    let compositor = new ARCompositor(device); //Nécessaire pour le fonctionnement du
+    let redenState = { //[SameObject] readonly attribute XRRenderState renderState;
+        depthNear = 0.1, 
         depthFar = 1000,
         inlineVerticalFieldOfView = null,
         baseLayer = null };
@@ -31,14 +30,16 @@ import XRRenderState from './xrrenderstate.js'
         get: function() { return visibilityState; }
     });
 
-    let updateRenderState = function(xrRenderState) {
+
+
+    this.updateRenderState = function(xrRenderState) {
         this.renderState.depthNear = xrRenderState.depthNear;
         this.renderState.depthFar = xrRenderState.depthFar;
         this.renderState.inlineVerticalFieldOfView = xrRenderState.inlineVerticalFieldOfView; 
         this.renderState.baseLayer = xrRenderState.baseLayer;
     }
 
-    let requestReferenceSpace = async function(XRReferenceSpaceType) {
+    this.requestReferenceSpace = async function(XRReferenceSpaceType) {
         if(XRReferenceSpaceType === "bounded-floor") {
             var referenceSpace = new XRBoundedReferenceSpace();
             return referenceSpace;
@@ -50,22 +51,21 @@ import XRRenderState from './xrrenderstate.js'
         else return false;
     }
 
-    
-    let requestAnimationFrame = function(callback) {
+    this.requestAnimationFrame = function(callback) {
         frameCount++;
         callbacks.push(animationFrameCallback);
         console.log("session requestAnimationFrame", callbacks.length);
         return frameCount;
     }
 
-    let cancelAnimationFrame = function(handle) {
+    this.cancelAnimationFrame = function(handle) {
         window.cancelAnimationFrame(handle);
     }
 
-    let end = async function() {
+    this.end = async function() {
     } 
 
-    let renderFrame = function() {
+    this.renderFrame = function() {
         let callback = callbacks.shift();
         if (callback !== undefined) {
             console.log('sessionCallback');                
@@ -91,6 +91,7 @@ import XRRenderState from './xrrenderstate.js'
     let onvisibilitychange;
 
     // another way of doing it 
+    //Source de Mr Didier
     let listeners = {};
     this.addEventListener = function (type, callback) {
         if (!(type in listeners)) {
