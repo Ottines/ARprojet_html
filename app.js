@@ -2,6 +2,8 @@ import * as THREE from './three.module.js';
 import { OrbitControls } from './OrbitControls.js';
 import { Stats } from './stats.module.js';
 import { ARButton } from './ARButton.js';
+import { OBJLoader } from './objloader.js';
+import { MTLLoader} from './mtlloader.js';
 
 class App{
 
@@ -52,12 +54,16 @@ class App{
         let controller;
         
         function onSelect() {
-            const material = new THREE.MeshPhongMaterial( { color: 0xffffff } );
-            const mesh = new THREE.Mesh( self.geometry, material );
-            mesh.position.set( 0, 0, - 0.3 ).applyMatrix4( controller.matrixWorld );
-            mesh.quaternion.setFromRotationMatrix( controller.matrixWorld );
-            self.scene.add( mesh );
-            self.meshes.push( mesh );
+			const mtlLoader = new MTLLoader();
+			mtlLoader.load('ressources/RubiksCube.mtl', (mtl) => {
+				mtl.preload();
+			const objLoader = new OBJLoader();
+				objLoader.setMaterials(mtl);
+			objLoader.load('ressources/RubiksCube.obj', (root) => {
+				self.scene.add(root);
+				});
+			});
+			
         }
 
         const btn = new ARButton( this.renderer );
@@ -77,7 +83,6 @@ class App{
     
 	render( ) {   
         this.stats.update();
-        //this.meshes.forEach( (mesh) => { mesh.rotateY( 0.01 ); });
         this.renderer.render( this.scene, this.camera );
     }
 }
