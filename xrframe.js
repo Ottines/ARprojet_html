@@ -10,11 +10,11 @@ let XRFrame = function(xrSession,xrDevice) {
     });
 
     this.getViewerPose = function(referenceSpace) {
-        
+        //XRviewPose pas encore fait
     }
 
     this.getPose = function(space, baseSpace) {
-        
+        return xrDevice.getTransform();
     } 
 
 };

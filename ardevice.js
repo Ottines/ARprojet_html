@@ -10,7 +10,7 @@ let ARDevice = function(deviceConfig) {
         get: function() { return started; }
     });
     
-    //on force l'appareil a supporter l'AR
+    
     Object.defineProperty(this,"supportedModes", {
         value : [ 'immersive-ar', 'inline' ],
         writable: false
