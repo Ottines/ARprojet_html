@@ -68,7 +68,7 @@ import XRRenderState from './xrrenderstate.js'
         let callback = callbacks.shift();
         if (callback !== undefined) {
             console.log('sessionCallback');                
-            callback(Date.now() - refTime, new XRFrame(this, device)); //Pas encore fait le XRFrame
+            callback(Date.now() - refTime, new XRFrame(this, device));
             if (compositor.isActive()) {
                 //compositor.updateVideo();
                 compositor.render();
@@ -89,8 +89,7 @@ import XRRenderState from './xrrenderstate.js'
     let onsqueezeend;
     let onvisibilitychange;
 
-    // another way of doing it 
-    //Source de Mr Didier
+    // another way of doing it
     let listeners = {};
     this.addEventListener = function (type, callback) {
         if (!(type in listeners)) {
