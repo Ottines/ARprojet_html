@@ -16,11 +16,8 @@ let XRSystem = function() {
   this.requestSession = async function(sessionMode, sessionInit) {
     if (sessionMode !== "immersive-ar" && sessionMode !== "inline")
         throw false;
-
     device = new ARDevice();
-    
     await device.start();
-    
     return new XRSession(device, sessionInit);
 };
 

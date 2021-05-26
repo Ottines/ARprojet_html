@@ -1,6 +1,6 @@
 import AR from './aruco.js';
 
-let ARDevice = function(deviceConfig) {
+let ARDevice = function() {
 
     let canvas = null; 
     let video = null;
